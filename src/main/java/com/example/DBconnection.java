@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 public class DBconnection {
   private static final String URL = "jdbc:mysql://localhost:3306/jobtracker";
     private static final String USER = "root";
-    private static final String PASSWORD = "Virk@123";
+    private static final String PASSWORD = "Your password here";
 
     public static Connection getConnection() {
         try {
