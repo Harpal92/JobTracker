@@ -1,13 +1,10 @@
-package Jobtracker.demo.src.main.java.com;
+package com.example;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-
-import Jobtracker.demo.src.main.java.com.example.DBconnection;
-import Jobtracker.demo.src.main.java.com.example.JobApplication;
 
 public class JobApplicationDAO {
    public void deleteJob(int id) {
@@ -65,7 +62,7 @@ public class JobApplicationDAO {
              String  test_date= rs.getString("test_date");
              String Status = rs.getString("status");
              int user_id=rs.getInt("user_id");
-             list.add(new JobApplication(companyname, role, apply_date, test_date, status, user_id));
+             list.add(new JobApplication(companyname, role, apply_date, test_date, Status, user_id));
 
            
                  

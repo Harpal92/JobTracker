@@ -1,13 +1,10 @@
-package Jobtracker.demo.src.main.java.com;
+package com.example;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-
-import Jobtracker.demo.src.main.java.Task;
-import Jobtracker.demo.src.main.java.com.example.DBconnection;
 
 
 

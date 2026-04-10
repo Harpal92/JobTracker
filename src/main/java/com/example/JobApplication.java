@@ -1,4 +1,4 @@
-package Jobtracker.demo.src.main.java.com.example;
+package com.example;
 
 public class JobApplication {
      /**

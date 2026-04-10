@@ -1,17 +1,13 @@
-package Jobtracker.demo.src.main.java.com.example;
+package com.example;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-
-
-import Jobtracker.demo.src.main.java.User;
-
 public class UserDAO {
     public void getAllUsers() {
-
+   
     String query = "SELECT * FROM users";
 
     try (Connection con = DBconnection.getConnection();
