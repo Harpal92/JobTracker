@@ -6,6 +6,35 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class UserDAO {
+    public User login(String email, String password){
+          User a = null;  
+    String query = "SELECT * FROM users WHERE email = ? AND password = ?";
+ try (Connection con = DBconnection.getConnection();
+         PreparedStatement ps = con.prepareStatement(query) ) {
+        ps.setString(1, email);
+        ps.setString(2, password);
+
+         ResultSet rs = ps.executeQuery();
+          
+                   
+        while (rs.next()) {
+             int id=rs.getInt("id");
+             String name=rs.getString("name");
+             String Email=rs.getString("email");
+             String Password = rs.getString("password");
+               a=new User(id,name, Email, Password);
+             
+             
+    
+    }
+    
+}
+catch (Exception e) {
+        e.printStackTrace();
+    }
+    return a;
+
+    }
     public void getAllUsers() {
    
     String query = "SELECT * FROM users";

@@ -14,36 +14,95 @@ public class Main {
          TaskDAO taskDao=new TaskDAO();
          DailyLogDAO dailylogDAO=new DailyLogDAO();
         Scanner sc=new Scanner(System.in);
-       
+        authMenu( sc, userDAO,jobDao,taskDao,dailylogDAO);
+        
+       }
+
+         
+      
+
+
+private static void authMenu(Scanner sc, UserDAO userDAO, JobApplicationDAO jobDao,TaskDAO taskDao,DailyLogDAO dailylogDAO) {
         int choice;
         do{
              System.out.println("====================");
         
         System.out.println("     JOB TRACKER   ");
         System.out.println("====================");
-        System.out.println("1 USER");
-        System.out.println( "2 JOB APPLICATION");
-        System.out.println( "3 TASK");
-     System.out.println(" 4 LEARNING Log");
-     System.out.println(" 5 STATS");
-        
+        System.out.println( "1 REGISTER");
+        System.out.println( "2 LOGIN");
         System.out.println ("0 EXIT");
-        System.out.print("ENTER CHOICE");
+        System.out.print("ENTER CHOICE ");
         choice=sc.nextInt();
+        sc.nextLine();
+       
         switch (choice) {
             case 1:
-                Users(userDAO,sc);
+                addUser(sc,userDAO);
                 break;
-                     case 2:
-                    JobApplicationMenu( sc,   jobDao);
-                     break;
-                    case 3:
-                    taskMenu( sc,  taskDao);
+                case 2:
+                    Login(sc,userDAO,jobDao,taskDao,dailylogDAO);
                     break;
-                    case 4:
-                        dailyLogMenu(sc,dailylogDAO);
+        
+               case 0:
+              System.out.println("Exiting...");
+                    break;
+                     default: 
+            System.out.println("invalid choice try again");
+
+        }
+        } while (choice !=0);
+    }
+
+
+ private static void Login(Scanner sc, UserDAO userDAO, JobApplicationDAO jobDao, TaskDAO taskDao, DailyLogDAO dailylogDAO) {
+     
+        System.out.print("Enter Email    : ");
+         String Email = sc.nextLine();
+        System.out.print("Enter Password : ");
+        String Password = sc.nextLine();
+        User a=userDAO.login(Email,Password);
+        if(a==null) System.out.println("Invalid credentials");
+        else mainmenu(sc, jobDao, taskDao, dailylogDAO, a.getId());
+}
+
+
+
+        
+              
+
+
+
+
+
+private static void mainmenu(Scanner sc, JobApplicationDAO jobDao, TaskDAO taskDao, DailyLogDAO dailylogDAO, int id) {
+   int choice;
+        do{
+             System.out.println("====================");
+        
+        System.out.println("     JOB TRACKER   ");
+        System.out.println("====================");
+        System.out.println( "1 JOB APPLICATION");
+        System.out.println( "2 TASK");
+       System.out.println(" 3 LEARNING Log");
+     System.out.println(" 4 STATS");
+        
+        System.out.println ("0 EXIT");
+        System.out.print("ENTER CHOICE ");
+        choice=sc.nextInt();
+        sc.nextLine();
+        switch (choice) {
+            
+                     case 1:
+                    JobApplicationMenu( sc,   jobDao,id);
+                     break;
+                    case 2:
+                    taskMenu( sc,  taskDao,id);
+                    break;
+                    case 3:
+                        dailyLogMenu(sc,dailylogDAO,id);
                         break;
-                        case 5:
+                        case 4:
                          StatsService.showStats();
                             break;
                        case 0:
@@ -59,56 +118,8 @@ public class Main {
     }
 
          
-        //  User user = new User("Harpal", "harpal@gmail.com", "1234");
-
-        // UserDAO dao = new UserDAO();
-        // int id=dao.addUser(user);
-         // JobApplication  jobApplication=new JobApplication( "Amazon", "softwaredeveloper", "2023-02-01", "2023-02-10", "Applied",id);
-//          JobApplicationDAO jobDao = new JobApplicationDAO();
-//         // jobDao.addJobApplication(jobApplication);
         
 
-//         List<JobApplication> jobs = jobDao.getAllJobs();
-
-//  for (JobApplication job : jobs) {
-//      System.out.println(job.getCompanyname() + " " + job.getRole());
-//  }
-// List<JobApplication> joBs = jobDao.getJobsByStatus("Applied");
-
-private static void Users(UserDAO userDAO, Scanner sc) {
-        int choice;
-        do{
-             System.out.println("====================");
-             System.out.println("    USERS  MENU    ");
-             System.out.println("====================");
-             System.out.println( "1 ADD USERS");
-             System.out.println( "2 VIEW ALL USERS" );
-              System.out.println ("0 EXIT");
-             System.out.print("ENTER CHOICE");
-              choice=sc.nextInt();
-        sc.nextLine();
-        switch (choice) {
-            case 1:
-                addUser(sc,userDAO);
-                break;
-                case 2:
-                    viewallUsers(userDAO);
-                    break;
-        
-               case 0:
-              System.out.println("Exiting...");
-                    break;
-                     default: 
-            System.out.println("invalid choice try again");
-
-        }
-        } while (choice !=0);
-    }
-
-
-private static void viewallUsers(UserDAO userDAO) {
-  userDAO.getAllUsers();
-}
 
 
 private static void addUser(Scanner sc, UserDAO userDAO) {
@@ -125,7 +136,7 @@ private static void addUser(Scanner sc, UserDAO userDAO) {
 }
 
 
-private static void dailyLogMenu(Scanner sc, DailyLogDAO dailylogDAO) {
+private static void dailyLogMenu(Scanner sc, DailyLogDAO dailylogDAO,int id) {
        int choice;
        do {
         System.out.println("====================");
@@ -140,7 +151,7 @@ private static void dailyLogMenu(Scanner sc, DailyLogDAO dailylogDAO) {
         sc.nextLine();
         switch (choice) {
             case 1:
-                addLog(sc,dailylogDAO);
+                addLog(sc,dailylogDAO,id);
                 break;
                 case 2:
                     viewallLogs(dailylogDAO);
@@ -176,11 +187,9 @@ private static void viewallLogs(DailyLogDAO dailylogDAO) {
 }
 
 
-private static void addLog(Scanner sc, DailyLogDAO dailylogDAO) {
+private static void addLog(Scanner sc, DailyLogDAO dailylogDAO,int id) {
     System.out.println("ADD NEW TASK");
-        System.out.print("Enter UserId    : ");
-         int userid = sc.nextInt();
-        sc.nextLine();
+        
         System.out.print("Enter Logdate : ");
         String logdate = sc.nextLine();
         System.out.print("Enter topic    : ");
@@ -190,13 +199,13 @@ private static void addLog(Scanner sc, DailyLogDAO dailylogDAO) {
         sc.nextLine();
         System.out.print("Enter notes : ");
         String notes = sc.nextLine();
-       DailyLog dailylog=new DailyLog(userid, logdate, topic, hoursspent, notes);
+       DailyLog dailylog=new DailyLog(id, logdate, topic, hoursspent, notes);
         dailylogDAO.addLog(dailylog);
         System.out.println("LOG ADDED SUCCESSFULLY");
 }
 
 
-private static void taskMenu(Scanner sc, TaskDAO taskDao) {
+private static void taskMenu(Scanner sc, TaskDAO taskDao,int id) {
         int choice;
          do {
         System.out.println("====================");
@@ -212,7 +221,7 @@ private static void taskMenu(Scanner sc, TaskDAO taskDao) {
         sc.nextLine();
         switch (choice) {
             case 1:
-                addTask(sc,taskDao);
+                addTask(sc,taskDao,id);
                 break;
                 case 2:
                     viewallTask(taskDao);
@@ -268,7 +277,7 @@ private static void taskMenu(Scanner sc, TaskDAO taskDao) {
 }
 
 
-      private static void addTask(Scanner sc, TaskDAO taskDao) {
+      private static void addTask(Scanner sc, TaskDAO taskDao,int id) {
         System.out.println("ADD NEW TASK");
         System.out.print("Enter Title    : ");
         String title = sc.nextLine();
@@ -278,24 +287,14 @@ private static void taskMenu(Scanner sc, TaskDAO taskDao) {
         String status = sc.nextLine();
         System.out.print("Enter Date (YYYY-MM-DD) : ");
         String date = sc.nextLine();
-        System.out.print("Enter UserId   : ");
-        int userid = sc.nextInt();
-        sc.nextLine();
-        Task task=new Task(title, description, status, date, userid);
+        Task task=new Task(title, description, status, date, id);
         
         taskDao.addTask(task);
         System.out.println("TASK ADDED SUCCESSFULLY");
 }
 
 
-      //  for (JobApplication job : joBs) {
-//     System.out.println(job.getCompanyname());
-// }
-// //jobDao.updateStatus(2, "Interview");
-//          //dao.getAllUsers();
-//         // jobDao.deleteJob(1); 
-//        jobDao.deleteJob(99);
-      private static void JobApplicationMenu(Scanner sc, JobApplicationDAO  jobDao) {
+      private static void JobApplicationMenu(Scanner sc, JobApplicationDAO  jobDao,int id) {
     
 
       int choice;
@@ -314,7 +313,7 @@ private static void taskMenu(Scanner sc, TaskDAO taskDao) {
         sc.nextLine();
         switch (choice) {
             case 1:
-                addjob(sc,jobDao);
+                addjob(sc,jobDao,id);
                 break;
                 case 2:
                     viewalljob(jobDao);
@@ -342,7 +341,7 @@ private static void taskMenu(Scanner sc, TaskDAO taskDao) {
        } while (choice !=0);  
     }
        
-        private static void addjob(Scanner sc,JobApplicationDAO jobDao) {
+        private static void addjob(Scanner sc,JobApplicationDAO jobDao,int id) {
         System.out.print(" TELL COMPANY NAME");
         String companyname=sc.nextLine();
         System.out.print("TELL ROLE");
@@ -353,10 +352,8 @@ private static void taskMenu(Scanner sc, TaskDAO taskDao) {
         String testdate= sc.nextLine();
         System.out.print("Enter new status (Applied/Interview/Rejected/Offer)") ;
         String status = sc.nextLine();
-        System.out.print("TELL  USERID ");
-        int userid=sc.nextInt();
-        sc.nextLine();
-        JobApplication job=new JobApplication(companyname, role, applydate, testdate, status, userid);
+       
+        JobApplication job=new JobApplication(companyname, role, applydate, testdate, status, id);
         
         jobDao.addJobApplication(job);
 
