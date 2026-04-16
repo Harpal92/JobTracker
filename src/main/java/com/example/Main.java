@@ -123,7 +123,7 @@ private static void mainmenu(Scanner sc, JobApplicationDAO jobDao, TaskDAO taskD
 
 
 private static void addUser(Scanner sc, UserDAO userDAO) {
-  System.out.println("ADD NEW USER");
+  System.out.println("ADD NEW USER ");
         System.out.print("Enter Name    : ");
          String name = sc.nextLine();
         System.out.print("Enter Email : ");
@@ -173,7 +173,7 @@ private static void dailyLogMenu(Scanner sc, DailyLogDAO dailylogDAO,int id) {
 
 
 private static void deleteLog(Scanner sc, DailyLogDAO dailylogDAO) {
-     System.out.println("TELL ID TO DELETE");
+     System.out.println("TELL ID TO DELETE ");
         int id=sc.nextInt();
        dailylogDAO.deleteLog(id);
 }
@@ -249,7 +249,7 @@ private static void taskMenu(Scanner sc, TaskDAO taskDao,int id) {
 
 
       private static void deleteTask(Scanner sc, TaskDAO taskDao) {
-    System.out.println("TELL ID TO DELETE");
+    System.out.println("TELL ID TO DELETE ");
         int id=sc.nextInt();
        taskDao.deleteTask(id);
        
@@ -260,7 +260,7 @@ private static void taskMenu(Scanner sc, TaskDAO taskDao,int id) {
            System.out.println("TELL ID ");
         int id=sc.nextInt();
         sc.nextLine();
-        System.out.println("Enter new status Pending/Completed)") ;
+        System.out.println("Enter new status Pending/Completed) ") ;
         String status = sc.nextLine();
        
         
@@ -278,7 +278,7 @@ private static void taskMenu(Scanner sc, TaskDAO taskDao,int id) {
 
 
       private static void addTask(Scanner sc, TaskDAO taskDao,int id) {
-        System.out.println("ADD NEW TASK");
+        System.out.println("ADD NEW TASK ");
         System.out.print("Enter Title    : ");
         String title = sc.nextLine();
         System.out.print("Enter Desc     : ");
@@ -342,15 +342,15 @@ private static void taskMenu(Scanner sc, TaskDAO taskDao,int id) {
     }
        
         private static void addjob(Scanner sc,JobApplicationDAO jobDao,int id) {
-        System.out.print(" TELL COMPANY NAME");
+        System.out.print(" TELL COMPANY NAME ");
         String companyname=sc.nextLine();
-        System.out.print("TELL ROLE");
+        System.out.print("TELL ROLE ");
         String role=sc.nextLine();
-        System.out.print("Enter apply date (YYYY-MM-DD)");
+        System.out.print("Enter apply date (YYYY-MM-DD) ");
         String applydate= sc.nextLine();
-         System.out.print("Enter test date (YYYY-MM-DD)");
+         System.out.print("Enter test date (YYYY-MM-DD) ");
         String testdate= sc.nextLine();
-        System.out.print("Enter new status (Applied/Interview/Rejected/Offer)") ;
+        System.out.print("Enter new status (Applied/Interview/Rejected/Offer) ") ;
         String status = sc.nextLine();
        
         JobApplication job=new JobApplication(companyname, role, applydate, testdate, status, id);
