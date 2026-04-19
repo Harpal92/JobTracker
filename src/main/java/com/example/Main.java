@@ -103,7 +103,7 @@ private static void mainmenu(Scanner sc, JobApplicationDAO jobDao, TaskDAO taskD
                         dailyLogMenu(sc,dailylogDAO,id);
                         break;
                         case 4:
-                         StatsService.showStats();
+                         StatsService.showStats(id);
                             break;
                        case 0:
                         System.out.println("Exiting...");

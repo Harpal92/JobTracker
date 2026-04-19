@@ -6,17 +6,20 @@ import java.sql.ResultSet;
 
 public class StatsService {
    
-    public static void showStats() {
+    public static void showStats(int userid) {
         System.out.println("========== YOUR STATS ==========");
         String query;
         int applied = 0;
         int pending = 0;
         double spent = 0.0;
        
-         query = "SELECT COUNT(*) FROM job_application";
+         query = "SELECT COUNT(*) FROM job_application WHERE user_id=? ";
         try (Connection con = DBconnection.getConnection();
-             PreparedStatement ps = con.prepareStatement(query);
-             ResultSet rs = ps.executeQuery()) {
+             PreparedStatement ps = con.prepareStatement(query))
+            {
+                 ps.setInt(1, userid);
+             ResultSet rs = ps.executeQuery();
+              
             
             if (rs.next()) {
                 int total = rs.getInt(1);
@@ -25,10 +28,11 @@ public class StatsService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-         query = "SELECT COUNT(*) FROM job_application WHERE status = 'Applied'";
+         query = "SELECT COUNT(*) FROM job_application WHERE status = 'Applied' AND  user_id= ?";
         try (Connection con = DBconnection.getConnection();
-             PreparedStatement ps = con.prepareStatement(query);
-             ResultSet rs = ps.executeQuery()) {
+             PreparedStatement ps = con.prepareStatement(query)){
+                ps.setInt(1, userid); 
+             ResultSet rs = ps.executeQuery(); 
             
             if (rs.next()) {
                  applied = rs.getInt(1);
@@ -37,10 +41,12 @@ public class StatsService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-         query = "SELECT COUNT(*) FROM job_application WHERE status = 'Interview'";
+         query = "SELECT COUNT(*) FROM job_application WHERE status = 'Interview' AND  user_id=?";
         try (Connection con = DBconnection.getConnection();
-             PreparedStatement ps = con.prepareStatement(query);
-             ResultSet rs = ps.executeQuery()) {
+             PreparedStatement ps = con.prepareStatement(query))
+             {
+                ps.setInt(1, userid); 
+             ResultSet rs = ps.executeQuery();
             
             if (rs.next()) {
                 int interview = rs.getInt(1);
@@ -49,10 +55,11 @@ public class StatsService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-         query = "SELECT COUNT(*) FROM job_application WHERE status = 'Rejected'";
+         query = "SELECT COUNT(*) FROM job_application WHERE status = 'Rejected' AND  user_id=?";
         try (Connection con = DBconnection.getConnection();
-             PreparedStatement ps = con.prepareStatement(query);
-             ResultSet rs = ps.executeQuery()) {
+             PreparedStatement ps = con.prepareStatement(query)) {
+                ps.setInt(1, userid); 
+             ResultSet rs = ps.executeQuery();
             
             if (rs.next()) {
                 int rejected = rs.getInt(1);
@@ -61,10 +68,11 @@ public class StatsService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-         query = "SELECT COUNT(*) FROM job_application WHERE status = 'Offer'";
+         query = "SELECT COUNT(*) FROM job_application WHERE status = 'Offer' AND  user_id=?";
         try (Connection con = DBconnection.getConnection();
-             PreparedStatement ps = con.prepareStatement(query);
-             ResultSet rs = ps.executeQuery()) {
+             PreparedStatement ps = con.prepareStatement(query)) {
+                ps.setInt(1, userid); 
+             ResultSet rs = ps.executeQuery();
             
             if (rs.next()) {
                 int offer= rs.getInt(1);
@@ -73,10 +81,11 @@ public class StatsService {
         } catch (Exception e) {
             e.printStackTrace(); 
         }
-        query = "SELECT COUNT(*) FROM  task_table ";
+        query = "SELECT COUNT(*) FROM  task_table WHERE  user_id=? ";
         try (Connection con = DBconnection.getConnection();
-             PreparedStatement ps = con.prepareStatement(query);
-             ResultSet rs = ps.executeQuery()) {
+             PreparedStatement ps = con.prepareStatement(query)) {
+                  ps.setInt(1, userid); 
+             ResultSet rs = ps.executeQuery();
             
             if (rs.next()) {
                 int task = rs.getInt(1);
@@ -85,10 +94,11 @@ public class StatsService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-         query = "SELECT COUNT(*) FROM  task_table WHERE status = 'Completed' ";
+         query = "SELECT COUNT(*) FROM  task_table WHERE status = 'Completed' AND  user_id=? ";
         try (Connection con = DBconnection.getConnection();
-             PreparedStatement ps = con.prepareStatement(query);
-             ResultSet rs = ps.executeQuery()) {
+             PreparedStatement ps = con.prepareStatement(query)) {
+               ps.setInt(1, userid); 
+             ResultSet rs = ps.executeQuery();
             
             if (rs.next()) {
                 int completetask = rs.getInt(1);
@@ -97,10 +107,11 @@ public class StatsService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-         query = "SELECT COUNT(*) FROM  task_table WHERE status =  'Pending' ";
+         query = "SELECT COUNT(*) FROM  task_table WHERE status =  'Pending' AND  user_id=?";
         try (Connection con = DBconnection.getConnection();
-             PreparedStatement ps = con.prepareStatement(query);
-             ResultSet rs = ps.executeQuery()) {
+             PreparedStatement ps = con.prepareStatement(query)) {
+               ps.setInt(1, userid); 
+             ResultSet rs = ps.executeQuery();
             
             if (rs.next()) {
                  pending = rs.getInt(1);
@@ -109,10 +120,11 @@ public class StatsService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-         query = "SELECT SUM(hours_spent) FROM daily_log ";
+         query = "SELECT SUM(hours_spent) FROM daily_log  WHERE  user_id=? ";
         try (Connection con = DBconnection.getConnection();
-             PreparedStatement ps = con.prepareStatement(query);
-             ResultSet rs = ps.executeQuery()) {
+             PreparedStatement ps = con.prepareStatement(query)){
+               ps.setInt(1, userid); 
+             ResultSet rs = ps.executeQuery();
             
             if (rs.next()) {
                  spent = rs.getDouble(1);
@@ -121,10 +133,11 @@ public class StatsService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-          query = "SELECT COUNT(DISTINCT topic) FROM daily_log ";
+          query = "SELECT COUNT(DISTINCT topic) FROM daily_log   WHERE  user_id=?";
         try (Connection con = DBconnection.getConnection();
-             PreparedStatement ps = con.prepareStatement(query);
-             ResultSet rs = ps.executeQuery()) {
+             PreparedStatement ps = con.prepareStatement(query)) {
+               ps.setInt(1, userid); 
+             ResultSet rs = ps.executeQuery();
             
             if (rs.next()) {
                 int topic = rs.getInt(1);
