@@ -121,7 +121,7 @@ private static void mainmenu(Scanner sc, JobApplicationDAO jobDao, TaskDAO taskD
         
 
 
-// add user 
+
 private static void addUser(Scanner sc, UserDAO userDAO) {
   System.out.println("ADD NEW USER ");
         System.out.print("Enter Name    : ");
