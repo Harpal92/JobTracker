@@ -84,8 +84,8 @@ private static void mainmenu(Scanner sc, JobApplicationDAO jobDao, TaskDAO taskD
         System.out.println("====================");
         System.out.println( "1 JOB APPLICATION");
         System.out.println( "2 TASK");
-       System.out.println(" 3 LEARNING Log");
-     System.out.println(" 4 STATS");
+       System.out.println("  3 LEARNING Log");
+    System.out.println("    4 STATS");
         
         System.out.println ("0 EXIT");
         System.out.print("ENTER CHOICE ");
@@ -121,7 +121,7 @@ private static void mainmenu(Scanner sc, JobApplicationDAO jobDao, TaskDAO taskD
         
 
 
-
+// add user 
 private static void addUser(Scanner sc, UserDAO userDAO) {
   System.out.println("ADD NEW USER ");
         System.out.print("Enter Name    : ");
@@ -173,7 +173,7 @@ private static void dailyLogMenu(Scanner sc, DailyLogDAO dailylogDAO,int id) {
 
 
 private static void deleteLog(Scanner sc, DailyLogDAO dailylogDAO) {
-     System.out.println("TELL ID TO DELETE ");
+     System.out.println("TELL WHICH ID TO DELETE ");
         int id=sc.nextInt();
        dailylogDAO.deleteLog(id);
 }
