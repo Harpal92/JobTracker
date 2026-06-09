@@ -3,6 +3,7 @@ package com.jobtracker.jobtracker.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 import com.jobtracker.jobtracker.model.DailyLog;
@@ -14,7 +15,7 @@ import com.jobtracker.jobtracker.repository.DailyLogRepository;
 public class DailyLogService {
     @Autowired
     DailyLogRepository  repo;
-     public DailyLog savelog(DailyLog dailylog) {
+     public DailyLog savelog(@NonNull  DailyLog dailylog) {
         
 
     return repo.save(dailylog);

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jobtracker.jobtracker.JwtUtil;
 import com.jobtracker.jobtracker.model.User;
 import com.jobtracker.jobtracker.service.UserService;
 
@@ -19,9 +20,17 @@ public class UserController {
       
        return service.saveUser(user);
     }
+    @Autowired
+    JwtUtil jwtutil;
     @PostMapping("/login")
-public User login(@RequestBody User user) {
-    return service.login(user.getEmail(), user.getPassword());
+public String login(@RequestBody User user) {
+      
+    User user1= service.login(user.getEmail(), user.getPassword());
+    if(user1==null) return null;
+    else{
+       return jwtutil.genearteToken(user.getEmail());
+    }
+
 }
 
 }
