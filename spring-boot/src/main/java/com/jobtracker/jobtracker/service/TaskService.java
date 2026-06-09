@@ -3,6 +3,7 @@ package com.jobtracker.jobtracker.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 
@@ -13,7 +14,7 @@ import com.jobtracker.jobtracker.repository.TaskRepository;
 public class TaskService {
     @Autowired
     TaskRepository  repo;
-    public Task saveTask(Task task) {
+    public Task saveTask(@NonNull Task task) {
         
 
     return repo.save(task);
