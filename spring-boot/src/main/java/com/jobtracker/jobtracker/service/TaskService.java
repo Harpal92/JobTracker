@@ -23,7 +23,7 @@ public class TaskService {
         return repo.findByUserId(id);
 
     }
-    public void deletejobById(int id){
+    public void deletetaskById(int id){
         repo.deleteById(id);
 
     }
@@ -32,4 +32,7 @@ public class TaskService {
        task.setStatus(status);
        repo.save(task);
     }
+     public Task gettaskById(int id) {
+    return repo.findById(id).get();
+}
 }

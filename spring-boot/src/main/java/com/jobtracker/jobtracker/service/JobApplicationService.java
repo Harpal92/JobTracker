@@ -19,6 +19,7 @@ public class JobApplicationService {
     return repo.save(jobApplication);
     }
     public List<JobApplication> getbyUserId(int id) {
+
         return repo.findByUserId(id);
 
     }
@@ -31,5 +32,8 @@ public class JobApplicationService {
        job.setStatus(status);
        repo.save(job);
     }
+    public JobApplication getJobById(int id) {
+    return repo.findById(id).get();
+}
     
 }
