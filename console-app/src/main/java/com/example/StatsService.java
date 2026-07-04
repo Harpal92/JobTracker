@@ -151,4 +151,4 @@ public class StatsService {
         if(spent>0)System.out.println("keep going!");
         if(spent==0)System.out.println("bro pls do study");
     }
-}
+} 
