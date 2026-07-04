@@ -26,9 +26,13 @@ public class UserController {
 public String login(@RequestBody User user) {
       
     User user1= service.login(user.getEmail(), user.getPassword());
-    if(user1==null) return null;
-    else{
-       return jwtutil.genearteToken(user.getEmail());
+    if(user1==null){
+       
+        return null;}
+    else{ 
+        
+
+       return  jwtutil.genearteToken(user.getEmail()); 
     }
 
 }

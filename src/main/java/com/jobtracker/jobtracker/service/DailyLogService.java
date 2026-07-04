@@ -29,6 +29,9 @@ public List<DailyLog> getbyUserId(int id) {
         repo.deleteById(id);
 
     }
+    public DailyLog getlogbyid(int id){
+      return  repo.findById(id).get();
+    }
     
     
 }

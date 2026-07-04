@@ -38,4 +38,7 @@ private PasswordEncoder encoder;
     return null;
    
 }
+public User findbyemail(String email){
+    return repo.findByEmail(email);
+}
 }
